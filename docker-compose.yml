@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  auth-server:
+    image: auth-server
+    #container_name: auth-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+    - 8080:8080
+    networks:
+      - bunjs
+    logging:
+      options:
+        max-size: 10m
+
+  # nginx:
+  #   image: nginx:latest
+  #   volumes:
+  #     - ./conf.d:/etc/nginx/conf.d/
+  #   depends_on:
+  #     - auth-server
+  #   ports:
+  #     - 8080:80
+
+volumes: {}
+networks:
+  bunjs:

@@ -1,7 +1,8 @@
 import { Elysia, t } from "elysia";
-import { prisma } from "~libs/prisma";
-import { isAuthenticated } from "~middlewares/auth";
-import { comparePassword, hashPassword, md5hash } from "~utils/bcrypt";
+import { prisma } from "../../libs/prisma";
+import { comparePassword, hashPassword, md5hash } from "../../utils/bcrypt";
+import { isAuthenticated } from "../../middlewares/auth";
+
 
 export const auth = (app: Elysia) =>
     app.group("auth", (app) =>
@@ -110,7 +111,7 @@ export const auth = (app: Elysia) =>
                         return {
                             success: false,
                             data: null,
-                            message: "Invalid credentials"
+                            message: "Invalid credentials username"
                         };
                     }
 
@@ -124,7 +125,7 @@ export const auth = (app: Elysia) =>
                         return {
                             success: false,
                             data: null,
-                            message: "Invalid credentials"
+                            message: "Invalid credentials password"
                         }
                     }
 
@@ -160,7 +161,7 @@ export const auth = (app: Elysia) =>
                 }
             )
             .use(isAuthenticated)
-            .get("/me", ({ user }) => {
+            .get("/users", ({ user }) => {
                 return {
                     success: true,
                     data: {

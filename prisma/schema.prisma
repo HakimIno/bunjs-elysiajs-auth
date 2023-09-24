@@ -8,16 +8,32 @@ datasource db {
 }
 
 model User {
+  id                String    @id @default(uuid())
+  name              String
+  username          String    @unique
+  email             String    @unique
+  salt              String
+  hash              String
+  summary           String?
+  links             Json?
+  location          Json?
+  profileImage      String
+  publishedArticles Article[] @relation(name: "Weerachit")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Article {
   id           String   @id @default(uuid())
-  name         String
-  username     String   @unique
-  email        String   @unique
-  salt         String
-  hash         String
-  summary      String?
-  links        Json?
-  location     Json?
-  profileImage String
+  title        String
+  bodyMarkdown String
+  published    Boolean? @default(false)
+  mainImage    String?
+  canonicalUrl String?
+  description  String
+  tags         String
+  author       User     @relation(name: "Weerachit", fields: [authorId], references: [id])
+  authorId     String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }

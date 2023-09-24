@@ -1,5 +1,6 @@
 import { Elysia } from "elysia";
-import { prisma } from "~libs/prisma";
+import { prisma } from "../libs/prisma";
+
 
 
 export const isAuthenticated = (app: Elysia) =>
@@ -18,6 +19,8 @@ export const isAuthenticated = (app: Elysia) =>
 
         const { userId } = await jwt.verify(cookie!.access_token);
 
+        console.log(userId)
+
         if (!userId) {
             set.status = 401;
 
@@ -33,6 +36,8 @@ export const isAuthenticated = (app: Elysia) =>
                 id: userId,
             },
         });
+
+        console.log(user)
 
         if (!user) {
             set.status = 401;
