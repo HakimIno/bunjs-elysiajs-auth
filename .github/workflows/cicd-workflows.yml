@@ -21,15 +21,12 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ip-172-31-35-188
 
     steps:
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.4.0
-      with:
-        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-      env:
-        SSH_AUTH_SOCK: ${{ runner.temp }}/ssh-agent.sock
-    - name: Deploy to EC2
-      run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ec2-user@your-ec2-instance-ip "docker pull kimsnow/apartments-app:latest && docker rm -f apartments-app-container || true && docker run -d -p 8080:8080 --name apartments-app-container kimsnow/apartments-app:latest"
+      - name: Pull image from docker hub
+        run: docker pull kimsnow/apartments-app:latest
+      - name: Delete old container
+        run: docker rm -f apartments-app-container
+      - name: Run docker container
+        run: docker run -d -p 8080:8080 --name apartments-app-container kimsnow/apartments-app
