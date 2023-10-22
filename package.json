@@ -4,15 +4,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
-    "pm:studio": "bunx prisma studio",
-    "pm:migrate": "bunx prisma migrate dev"
+    "pm-studio": "bunx prisma studio",
+    "pm-migrate": "bunx prisma migrate dev",
+    "pm-generate": "bunx prisma generate"
   },
   "dependencies": {
     "@elysiajs/cookie": "^0.6.1",
     "@elysiajs/cors": "^0.7.0",
     "@elysiajs/jwt": "^0.6.4",
     "@elysiajs/swagger": "^0.7.2",
-    "@prisma/client": "latest",
+    "@prisma/client": "4.15.0",
     "elysia": "latest",
     "figlet": "^1.6.0"
   },
