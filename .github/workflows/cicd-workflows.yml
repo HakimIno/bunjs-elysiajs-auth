@@ -15,9 +15,9 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker build -t HakimIno/bunjs-elysiajs-auth .
+        run: docker build -t hakimino/bunjs-elysiajs-auth .
       - name: Publish image to docker hub
-        run: docker push HakimIno/bunjs-elysiajs-auth:latest
+        run: docker push hakimino/bunjs-elysiajs-auth:latest
 
   deploy:
     needs: build
@@ -25,8 +25,8 @@ jobs:
 
     steps:
       - name: Pull image from docker hub
-        run: docker pull HakimIno/bunjs-elysiajs-auth:latest
+        run: docker pull hakimino/bunjs-elysiajs-auth:latest
       - name: Delete old container
         run: docker rm -f auth-server
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name auth-server HakimIno/bunjs-elysiajs-auth
+        run: docker run -d -p 8080:8080 --name auth-server hakimino/bunjs-elysiajs-auth
