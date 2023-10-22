@@ -1,30 +1,17 @@
 version: '3.9'
 services:
-  auth-server:
-    image: auth-server
-    #container_name: auth-api
+  db_api:
+    container_name: db_api
+    image: postgres:15
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+        POSTGRES_DB_NAM$:  ${POSTGRES_DB_NAME}F
     ports:
-    - 8080:8080
-    networks:
-      - bunjs
-    logging:
-      options:
-        max-size: 10m
-
-  # nginx:
-  #   image: nginx:latest
-  #   volumes:
-  #     - ./conf.d:/etc/nginx/conf.d/
-  #   depends_on:
-  #     - auth-server
-  #   ports:
-  #     - 8080:80
-
+    - ${PORT}:${PORT}
+    
 volumes: {}
-networks:
-  bunjs:
+
