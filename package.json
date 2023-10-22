@@ -12,7 +12,7 @@
     "@elysiajs/cors": "^0.7.0",
     "@elysiajs/jwt": "^0.6.4",
     "@elysiajs/swagger": "^0.7.2",
-    "@prisma/client": "latest",
+    "@prisma/client": "5.1.1",
     "elysia": "latest",
     "figlet": "^1.6.0"
   },
