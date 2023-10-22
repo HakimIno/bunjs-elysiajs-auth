@@ -3,11 +3,11 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - [main]
+      - main
 
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -21,7 +21,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [ip-172-31-36-18]
+    runs-on: ip-172-31-36-18
 
     steps:
       - name: Pull image from docker hub
