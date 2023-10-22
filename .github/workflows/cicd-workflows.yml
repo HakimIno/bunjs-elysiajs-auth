@@ -21,7 +21,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [ip-172-31-36-18]
+    runs-on: ip-172-31-35-188
 
     steps:
       - name: Pull image from docker hub
