@@ -3,7 +3,7 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts",
+    "dev": "bun --hot src/index.ts",
     "pm-studio": "bunx prisma studio",
     "pm-migrate": "bunx prisma migrate dev",
     "pm-generate": "bunx prisma generate"
