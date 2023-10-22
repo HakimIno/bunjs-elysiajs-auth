@@ -15,18 +15,18 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker build -t integrationninjas/nodejs-app .
+        run: docker build -t kimsnow/apartments-app .
       - name: Publish image to docker hub
         run: docker push kimsnow/apartments-app:tagname
 
   deploy:
     needs: build
-    runs-on: [aws-ec2]
+    runs-on: [ip-172-31-36-18]
 
     steps:
       - name: Pull image from docker hub
         run: docker pull kimsnow/apartments-app:tagname
       - name: Delete old container
-        run: docker rm -f apartments=api-container
+        run: docker rm -f apartments-api-container
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name apartments=api-container integrationninjas/nodejs-app
+        run: docker run -d -p 8080:8080 --name apartments-api-container  kimsnow/apartments-app

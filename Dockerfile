@@ -1,18 +1,12 @@
-FROM oven/bun
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN bun install
-
+FROM oven/bun:1
+WORKDIR /app
 COPY . .
-
-EXPOSE 8080
-
-USER bun
-
-CMD bun run --watch src/index.ts
+RUN bun install
+ 
+ARG PORT
+EXPOSE ${PORT:-8080}
+ 
+CMD ["bun", "src/index.ts"]
 
 # FROM oven/bun
 
