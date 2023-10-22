@@ -21,12 +21,12 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ip-172-31-36-18
+    runs-on: ip-172-31-35-188
 
     steps:
       - name: Pull image from docker hub
         run: docker pull kimsnow/apartments-app:latest
       - name: Delete old container
-        run: docker rm -f auth-server
+        run: docker rm -f apartments-app-container
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name auth-server kimsnow/apartments-app
+        run: docker run -d -p 8080:8080 --name apartments-app-container kimsnow/apartments-app
