@@ -1,31 +1,17 @@
-FROM oven/bun:1
+FROM oven/bun:1.0.7
+
 WORKDIR /app
+
+COPY package.json .
+COPY bun.lockb .
+
+RUN bun install 
 
 COPY . .
 
-RUN bun install
-RUN bunx prisma generate
- 
+ENV NODE_ENV production
+
 ARG PORT
 EXPOSE ${PORT:-8080}
  
 CMD ["bun", "src/index.ts"]
-
-# FROM oven/bun
-
-# WORKDIR /app
-
-# COPY package.json .
-# COPY bun.lockb .
-
-# RUN bun install --production
-
-# COPY src src
-# COPY tsconfig.json .
-# # COPY public public
-
-# ENV NODE_ENV production
-
-# CMD ["bun", "src/index.ts"]
-
-# EXPOSE 3000
