@@ -17,7 +17,7 @@ jobs:
       - name: Build docker image
         run: docker build -t hakimino/bunjs-elysiajs-auth .
       - name: Publish image to docker hub
-        run: docker push hakimino/bunjs-elysiajs-auth:latest
+        run: docker push kimsnow/apartments-app:tagname
 
   deploy:
     needs: build
@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Pull image from docker hub
-        run: docker pull hakimino/bunjs-elysiajs-auth:latest
+        run: docker pull kimsnow/apartments-app:tagname
       - name: Delete old container
         run: docker rm -f auth-server
       - name: Run docker container
